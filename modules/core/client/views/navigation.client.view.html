@@ -8,20 +8,23 @@
           <a href>
             <span class="clear">
                 <span class="block m-t-xs">
-                    <strong class="font-bold">User</strong>
+                    <h2><strong class="font-bold">Bookstore :)</strong></h2>
              </span>
-                <span class="text-muted text-xs block">Example</span>
+                <span class="text-muted text-xs block">MEAN Stack <i>Online Shop</i></span>
             </span>
           </a>
         </div>
         <div class="logo-element">
-          IN+
+          BS:)
         </div>
       </li>
       <li ng-class="{active: $uiRoute}" ui-route="/" >
-        <a href="/#!/"><i class="fa fa-laptop"></i> <span class="nav-label">Index</span></a>
+        <a href="/#!/"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
       </li>
-      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
+	  <li ng-class="{active: $uiRoute}" ui-route="/chat" >
+        <a href="/chat"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
+      </li>
+      <!--<li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu nav nav-second-level">
           <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
@@ -29,7 +32,7 @@
           </li>
         </ul>
         <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
-      </li>
+    </li>-->
     </ul>
   </div>
 </nav>
