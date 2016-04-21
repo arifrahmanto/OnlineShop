@@ -52,6 +52,7 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
+      /**
       clientCSS: {
         files: defaultAssets.client.css,
         tasks: ['csslint'],
@@ -72,7 +73,7 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
-      }
+      }**/
     },
     nodemon: {
       dev: {
@@ -106,6 +107,7 @@ module.exports = function (grunt) {
       options: {},
       target: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS, defaultAssets.client.js, testAssets.tests.server, testAssets.tests.client, testAssets.tests.e2e)
     },
+    /**
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -113,7 +115,7 @@ module.exports = function (grunt) {
       all: {
         src: defaultAssets.client.css
       }
-    },
+  },**/
     ngAnnotate: {
       production: {
         files: {
@@ -297,13 +299,13 @@ module.exports = function (grunt) {
   });
 
   // Lint CSS and JavaScript files.
-  grunt.registerTask('lint', ['sass', 'less', 'jshint', 'eslint', 'csslint']);
+  grunt.registerTask('lint', ['sass', 'less', 'jshint', 'eslint']);
 
   // Lint project files and minify them into two production files.
   grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Run the project tests
-  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest']);
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
   grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
   grunt.registerTask('test:e2e', ['env:test', 'lint', 'dropdb', 'server', 'protractor']);

@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
   validator = require('validator'),
+  uniqueValidator = require('mongoose-unique-validator'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
@@ -46,7 +47,7 @@ var UserSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
+    unique: 'Email already exists',
     lowercase: true,
     trim: true,
     default: '',
@@ -99,6 +100,8 @@ var UserSchema = new Schema({
     type: Date
   }
 });
+
+UserSchema.plugin(uniqueValidator);
 
 /**
  * Hook a pre save method to hash the password
@@ -177,7 +180,7 @@ UserSchema.statics.generateRandomPassphrase = function () {
     var password = '';
     var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
 
-    // iterate until the we have a valid passphrase. 
+    // iterate until the we have a valid passphrase.
     // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
     while (password.length < 20 || repeatingCharacters.test(password)) {
       // build the random password

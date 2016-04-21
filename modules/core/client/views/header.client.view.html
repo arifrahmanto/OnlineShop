@@ -23,6 +23,10 @@
                  <i class="fa fa-shopping-cart"></i><span class="label label-primary">0</span></a>
             </li>
             <li uib-dropdown="">
+              <a uib-dropdown-toggle="" class="count-info">
+                 <i class="fa fa-envelope"></i><span class="label label-warning">0</span></a>
+            </li>
+            <li uib-dropdown="">
                 <a uib-dropdown-toggle="" class="user-header-dropdown-toggle" role="button">
                     <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
                     <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
@@ -37,12 +41,18 @@
                     <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
                         <a ui-sref="settings.password">Change Password</a>
                     </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="">Addresses</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="">Orders History</a>
+                    </li>
                     <!--<li ui-sref-active="active">
                         <a ui-sref="settings.accounts">Manage Social Accounts</a>
                     </li>-->
                     <li class="divider"></li>
                     <li>
-                        <a href="/api/auth/signout" target="_self">Signout</a>
+                        <a href="/api/auth/signout" target="_self">Logout</a>
                     </li>
                 </ul>
             </li>
