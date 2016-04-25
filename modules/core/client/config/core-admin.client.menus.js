@@ -6,6 +6,7 @@ angular.module('core.admin').run(['Menus',
       title: 'Admin',
       state: 'admin',
       type: 'dropdown',
+      icon: 'fa-bars',
       roles: ['admin']
     });
   }
