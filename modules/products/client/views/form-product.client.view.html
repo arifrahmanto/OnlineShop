@@ -4,9 +4,9 @@
       <h2>{{vm.product._id ? 'Edit Product' : 'New Product'}}</h2>
     </div>
   </div>
-  <div class="wrapper wrapper-content">
+  <div class="row wrapper wrapper-content">
     <form name="vm.form.productForm" ng-submit="vm.save(vm.form.productForm.$valid)" novalidate>
-      <div class="row col-lg-4">
+      <div class="col-lg-4">
         <fieldset>
           <div class="form-group" show-errors>
             <label class="control-label" for="title">Title</label>

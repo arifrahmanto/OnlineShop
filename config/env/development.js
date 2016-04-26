@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/bookstore-dev',
     options: {
       user: '',
       pass: ''
@@ -32,7 +32,7 @@ module.exports = {
     }
   },
   app: {
-    title: defaultEnvConfig.app.title + ' - Dev Environment'
+    title: defaultEnvConfig.app.title + ' - Dev'
   },
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -45,8 +45,8 @@ module.exports = {
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
-    clientID: process.env.GOOGLE_ID || 'APP_ID',
-    clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
+    clientID: process.env.GOOGLE_ID || '523872860512-lctr9atgdnd49rce7c0ktb73at3cam6h.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'a1RKA7tTCVov0omdqVY_cbHa',
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {
@@ -66,12 +66,12 @@ module.exports = {
     sandbox: true
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    from: process.env.MAILER_FROM || 'Bookstore:) Dev Team',
     options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
       auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+        user: process.env.MAILER_EMAIL_ID || 'arif.ismiadi@gmail.com',
+        pass: process.env.MAILER_PASSWORD || 'password'
       }
     }
   },

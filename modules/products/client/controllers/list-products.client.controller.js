@@ -9,7 +9,6 @@
 
   function ProductsListController(ProductsService) {
     var vm = this;
-
     vm.products = ProductsService.query();
   }
 })();

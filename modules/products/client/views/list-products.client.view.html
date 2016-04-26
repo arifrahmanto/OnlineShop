@@ -1,22 +1,51 @@
 <section>
-  <div class="page-header">
-    <h1>Products</h1>
+  <!--  <div class="page-header">
+  <h1>Products</h1>
+</div>
+<div class="list-group">
+<a data-ng-repeat="product in vm.products"
+data-ui-sref="products.view({ productId: product._id })"
+class="list-group-item">
+<small class="list-group-item-text">
+Posted on
+<span data-ng-bind="product.created | date:'mediumDate'"></span>
+by
+<span data-ng-if="product.user" data-ng-bind="product.user.displayName"></span>
+<span data-ng-if="!product.user">Deleted User</span>
+</small>
+<h4 class="list-group-item-heading" data-ng-bind="product.title"></h4>
+</a>
+</div>
+<div class="alert alert-warning text-center" data-ng-if="vm.products.$resolved && !vm.products.length">
+No Products yet, why don't you <a data-ui-sref="products.create">create one</a>?
+</div>-->
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>{{category}} Books:</h2>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="product in vm.products"
-       data-ui-sref="products.view({ productId: product._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="product.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="product.user" data-ng-bind="product.user.displayName"></span>
-        <span data-ng-if="!product.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="product.name"></h4>
-    </a>
+  <div class="col-lg-2">
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="vm.products.$resolved && !vm.products.length">
-    No Products yet, why don't you <a data-ui-sref="products.create">create one</a>?
+</div>
+<div class="row wrapper wrapper-content animated fadeInRight">
+  <div class="col-md-3"  data-ng-repeat="product in vm.products"
+  data-ui-sref="products.view({ productId: product._id })">
+    <div class="ibox">
+      <div class="ibox-content product-box">
+        <div class="product-imitation">
+          [ INFO ]
+        </div>
+        <div class="product-desc">
+          <span class="product-price">
+            ${{product.price}}
+          </span>
+          <small class="text-muted">{{product.author}}</small>
+          <a href="#" class="product-name"> {{product.title}}</a>
+          <div class="m-t text-righ">
+            <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 </section>
