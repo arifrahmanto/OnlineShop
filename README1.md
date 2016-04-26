@@ -1,2 +1,0 @@
-# OnlineShop
-Learn MEAN Stack
