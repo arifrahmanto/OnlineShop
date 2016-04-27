@@ -1,17 +1,21 @@
 'use strict';
 
 /**
- * Module dependencies.
- */
+* Module dependencies.
+*/
 var path = require('path'),
+  fs = require('fs'),
+  path = require('path'),
   mongoose = require('mongoose'),
+  multer = require('multer'),
+  config = require(path.resolve('./config/config')),
   Product = mongoose.model('Product'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
 /**
- * Create a Product
- */
+* Create a Product
+*/
 exports.create = function(req, res) {
   var product = new Product(req.body);
   product.user = req.user;
@@ -28,8 +32,8 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current Product
- */
+* Show the current Product
+*/
 exports.read = function(req, res) {
   // convert mongoose document to JSON
   var product = req.product ? req.product.toJSON() : {};
@@ -42,8 +46,8 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a Product
- */
+* Update a Product
+*/
 exports.update = function(req, res) {
   var product = req.product ;
 
@@ -61,8 +65,33 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an Product
- */
+* Update profile picture
+*/
+exports.changeProductPicture = function (req, res) {
+  var message = null;
+  var upload = multer(config.uploads.productUpload).single('newProductPicture');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;
+  upload(req, res, function (uploadError) {
+    console.log(req.body);
+    console.log(req.files);
+    if(uploadError) {
+      return res.status(400).send({
+        message: 'Error occurred while uploading profile picture'
+      });
+    } else {
+      var result = {};
+      result.imageURL = config.uploads.productUpload.dest + req.file.filename;
+      res.jsonp(result);
+    }
+  });
+};
+
+/**
+* Delete an Product
+*/
 exports.delete = function(req, res) {
   var product = req.product ;
 
@@ -78,8 +107,8 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of Products
- */
+* List of Products
+*/
 exports.list = function(req, res) {
   Product.find().sort('-created').populate('user', 'displayName').exec(function(err, products) {
     if (err) {
@@ -98,8 +127,8 @@ exports.list = function(req, res) {
 };
 
 /**
- * Product middleware
- */
+* Product middleware
+*/
 exports.productByID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
