@@ -1,34 +1,14 @@
 <section>
-  <!--  <div class="page-header">
-  <h1>Products</h1>
-</div>
-<div class="list-group">
-<a data-ng-repeat="product in vm.products"
-data-ui-sref="products.view({ productId: product._id })"
-class="list-group-item">
-<small class="list-group-item-text">
-Posted on
-<span data-ng-bind="product.created | date:'mediumDate'"></span>
-by
-<span data-ng-if="product.user" data-ng-bind="product.user.displayName"></span>
-<span data-ng-if="!product.user">Deleted User</span>
-</small>
-<h4 class="list-group-item-heading" data-ng-bind="product.title"></h4>
-</a>
-</div>
-<div class="alert alert-warning text-center" data-ng-if="vm.products.$resolved && !vm.products.length">
-No Products yet, why don't you <a data-ui-sref="products.create">create one</a>?
-</div>-->
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>{{category}} Books:</h2>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>{{category}} Books:</h2>
+    </div>
+    <div class="col-lg-2">
+    </div>
   </div>
-  <div class="col-lg-2">
-  </div>
-</div>
-<div class="row wrapper wrapper-content animated fadeInRight">
-  <div class="col-md-3"  data-ng-repeat="product in vm.products"
-  data-ui-sref="products.view({ productId: product._id })">
+  <div class="row wrapper wrapper-content animated fadeInRight">
+    <div class="col-md-3"  data-ng-repeat="product in vm.products |  pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize"
+      data-ui-sref="products.view({ productId: product._id })">
     <div class="ibox">
       <div class="ibox-content product-box">
         <div class="product-imitation">
@@ -47,5 +27,6 @@ No Products yet, why don't you <a data-ui-sref="products.create">create one</a>?
       </div>
     </div>
   </div>
-</div>
+  </div>
+  <uib-pagination total-items="vm.products.length" items-per-page="vm.pageSize" max-size="5" boundary-link-numbers="true" ng-model="vm.curPage" ></uib-pagination>
 </section>

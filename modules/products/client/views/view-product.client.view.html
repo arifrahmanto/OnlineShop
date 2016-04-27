@@ -1,6 +1,7 @@
 <section>
   <div class="page-header">
     <h1 data-ng-bind="vm.product.title"></h1>
+    <small>by <b>{{vm.product.author}}</b></small>
   </div>
   <div class="pull-right"
        data-ng-show="vm.product.isCurrentUserOwner">
