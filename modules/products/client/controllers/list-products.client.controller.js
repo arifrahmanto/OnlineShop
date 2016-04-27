@@ -19,5 +19,7 @@
       vm.products = data;
       vm.numberOfPage = Math.ceil(data.length / vm.pageSize);
     });
+
+    //https://www.googleapis.com/books/v1/volumes?q=food+allergies&maxResults=3
   }
 })();
