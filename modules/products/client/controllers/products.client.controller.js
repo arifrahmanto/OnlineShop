@@ -6,9 +6,9 @@
     .module('products')
     .controller('ProductsController', ProductsController);
 
-  ProductsController.$inject = ['$scope', '$state', 'Authentication', 'productResolve', '$timeout', '$window', 'FileUploader'];
+  ProductsController.$inject = ['$scope', '$state', 'Authentication', 'productResolve', '$timeout', '$window', 'FileUploader', '$sce'];
 
-  function ProductsController ($scope, $state, Authentication, product, $timeout, $window, FileUploader) {
+  function ProductsController ($scope, $state, Authentication, product, $timeout, $window, FileUploader, $sce) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.urlPreview = $sce.trustAsResourceUrl('https://books.google.co.id/books?id='+vm.product.googleId+'&lpg=PP1&pg=PP1&output=embed');
     //vm.preview = product.googleId ? $sce.trustAsResourceUrl()'https://books.google.co.id/books?id='+product.googleId+'=PP1&dq=fiction&pg=PP1&output=embed') : '';
 
     var defImage = 'modules/products/client/img/book.png';

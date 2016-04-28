@@ -6,7 +6,8 @@
     <div class="col-lg-2">
     </div>
   </div>
-  <div class="row wrapper wrapper-content animated fadeInRight">
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
     <div class="col-md-3"  data-ng-repeat="product in vm.products | filter:vm.searchText | pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize"
       data-ui-sref="products.view({ productId: product._id })">
     <div class="ibox">
@@ -29,4 +30,6 @@
   </div>
   </div>
   <uib-pagination total-items="vm.products.length" items-per-page="vm.pageSize" max-size="5" boundary-link-numbers="true" ng-model="vm.curPage" ></uib-pagination>
+</div>
+
 </section>

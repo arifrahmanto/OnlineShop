@@ -131,7 +131,8 @@ exports.list = function(req, res) {
 exports.booksFromGoogle = function(req, res) {
   var text = req.param('text') ? req.param('text') : 'computer';
   var count = req.param('count') ? req.param('count') : '5';
-  outRequest('https://www.googleapis.com/books/v1/volumes?q='+text+'&maxResults='+count, function (error, response, body) {
+  var start = req.param('start') ? req.param('start') : '0';
+  outRequest('https://www.googleapis.com/books/v1/volumes?q='+text+'&maxResults='+count+'&startIndex='+start, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       var importResult = JSON.parse(body).items;
       var product = {};
@@ -140,8 +141,8 @@ exports.booksFromGoogle = function(req, res) {
         product = new Product();
         product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
         product.description = badData.volumeInfo.description ? badData.volumeInfo.description : '';
-        product.author = badData.volumeInfo.authors[0] ? badData.volumeInfo.authors[0] : 'Unknown';
-        product.category = badData.volumeInfo.categories[0] ? badData.volumeInfo.categories[0] : '';
+        product.author = badData.volumeInfo.authors ? badData.volumeInfo.authors[0] : 'Unknown';
+        product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : '';
         product.imageUrl = badData.volumeInfo.imageLinks.smallThumbnail ? badData.volumeInfo.imageLinks.smallThumbnail : '';
         product.googleId = badData.id;
         product.status = 'A';
