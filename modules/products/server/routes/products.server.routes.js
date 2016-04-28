@@ -23,6 +23,9 @@ module.exports = function(app) {
   app.route('/api/fromGoogle')
     .get(products.booksFromGoogle);
 
+  app.route('/api/bookscategories')
+    .get(products.getCategories);
+    
   // Finish by binding the Product middleware
   app.param('productId', products.productByID);
 };

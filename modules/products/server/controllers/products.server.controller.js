@@ -128,6 +128,23 @@ exports.list = function(req, res) {
   });
 };
 
+exports.getCategories = function(req, res, next) {
+  Product.aggregate([
+    { $group: {
+      _id: '$category',
+      count: { $sum: 1 }
+    }},
+    { $sort: { 'count': -1 } },
+    { $limit: 5 }
+  ], function(err, result) {
+    if(err){
+      next(err);
+    } else {
+      res.json(result);
+    }
+  });
+};
+
 exports.booksFromGoogle = function(req, res) {
   var text = req.param('text') ? req.param('text') : 'computer';
   var count = req.param('count') ? req.param('count') : '5';
@@ -135,23 +152,23 @@ exports.booksFromGoogle = function(req, res) {
   outRequest('https://www.googleapis.com/books/v1/volumes?q='+text+'&maxResults='+count+'&startIndex='+start, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       var importResult = JSON.parse(body).items;
-      var product = {};
+      var products = [];
       for (var i=0; i < importResult.length; i++){
         var badData = importResult[i];
-        product = new Product();
+        var product = new Product();
         product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
         product.description = badData.volumeInfo.description ? badData.volumeInfo.description : '';
         product.author = badData.volumeInfo.authors ? badData.volumeInfo.authors[0] : 'Unknown';
-        product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : '';
+        product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : 'No Category';
         product.imageUrl = badData.volumeInfo.imageLinks.smallThumbnail ? badData.volumeInfo.imageLinks.smallThumbnail : '';
         product.googleId = badData.id;
         product.status = 'A';
         product.price = 5;
         product.stock = 5;
         product.save();
+        products.push(product);
       }
-      res.json(importResult);
-      //console.log(body) // Print the google web page.
+      res.jsonp(products);
     } else {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(error)
