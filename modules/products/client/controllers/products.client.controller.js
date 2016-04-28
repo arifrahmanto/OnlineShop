@@ -17,6 +17,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    //vm.preview = product.googleId ? $sce.trustAsResourceUrl()'https://books.google.co.id/books?id='+product.googleId+'=PP1&dq=fiction&pg=PP1&output=embed') : '';
 
     var defImage = 'modules/products/client/img/book.png';
     if (vm.product.imageUrl === undefined) {

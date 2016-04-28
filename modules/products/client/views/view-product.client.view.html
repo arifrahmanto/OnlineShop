@@ -4,7 +4,7 @@
     <small>by <b>{{vm.product.author}}</b></small>
   </div>
   <div class="pull-right"
-       data-ng-show="vm.product.isCurrentUserOwner">
+       data-ng-show="vm.authentication.user.roles.indexOf('admin')>-1">
     <a class="btn btn-primary"
        data-ui-sref="products.edit({ productId: vm.product._id })">
       <i class="glyphicon glyphicon-edit"></i>
@@ -17,11 +17,8 @@
     <em class="text-muted">
       Posted on
       <span data-ng-bind="vm.product.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.product.user"
-            data-ng-bind="vm.product.user.displayName"></span>
-      <span data-ng-if="!vm.product.user">Deleted User</span>
     </em>
   </small>
+  <!--<iframe frameborder="0" scrolling="no" style="border:0px" src="https://books.google.co.id/books?id=Ao7g49o9wmcC&lpg=PP1&dq=fiction&pg=PP1&output=embed" width=500 height=500></iframe>-->
   <p class="lead" data-ng-bind="vm.product.content"></p>
 </section>

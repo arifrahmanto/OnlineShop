@@ -133,16 +133,18 @@ exports.booksFromGoogle = function(req, res) {
   var count = req.param('count') ? req.param('count') : '5';
   outRequest('https://www.googleapis.com/books/v1/volumes?q='+text+'&maxResults='+count, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      //result = JSON.parse(body);
       var importResult = JSON.parse(body).items;
       var product = {};
       for (var i=0; i < importResult.length; i++){
         var badData = importResult[i];
         product = new Product();
         product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
+        product.description = badData.volumeInfo.description ? badData.volumeInfo.description : '';
         product.author = badData.volumeInfo.authors[0] ? badData.volumeInfo.authors[0] : 'Unknown';
         product.category = badData.volumeInfo.categories[0] ? badData.volumeInfo.categories[0] : '';
         product.imageUrl = badData.volumeInfo.imageLinks.smallThumbnail ? badData.volumeInfo.imageLinks.smallThumbnail : '';
+        product.googleId = badData.id;
+        product.status = 'A';
         product.price = 5;
         product.stock = 5;
         product.save();

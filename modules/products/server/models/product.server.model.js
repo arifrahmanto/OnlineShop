@@ -44,6 +44,16 @@ var ProductSchema = new Schema({
     type: Number,
     default: 0
   },
+  status: {
+    type: String,
+    default: 'A',
+    trim: true
+  },
+  googleId: {
+    type: String,
+    default: '',
+    trim: true
+  },
   created: {
     type: Date,
     default: Date.now
