@@ -10,7 +10,7 @@
     <div class="col-md-3"  data-ng-repeat="product in vm.products | filter:vm.searchText | pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize"
       data-ui-sref="products.view({ productId: product._id })">
     <div class="ibox">
-      <div class="product-box">
+      <div class="ibox-content product-box">
         <div class="product-imitation">
           <img ng-src="{{product.imageUrl}}" alt="{{product.title}}"  class="user-profile-picture">
         </div>

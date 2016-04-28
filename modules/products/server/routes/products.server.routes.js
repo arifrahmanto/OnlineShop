@@ -20,6 +20,9 @@ module.exports = function(app) {
   app.route('/api/productspicture')
     .post(products.changeProductPicture);
 
+  app.route('/api/fromGoogle')
+    .get(products.booksFromGoogle);
+
   // Finish by binding the Product middleware
   app.param('productId', products.productByID);
 };

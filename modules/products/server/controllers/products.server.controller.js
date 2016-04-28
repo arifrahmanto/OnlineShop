@@ -9,6 +9,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
+  outRequest = require('request'),
   Product = mongoose.model('Product'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -63,6 +64,7 @@ exports.update = function(req, res) {
     }
   });
 };
+
 
 /**
 * Update profile picture
@@ -121,6 +123,35 @@ exports.list = function(req, res) {
         hasil.data = products;
         hasil.count = count;
         res.jsonp(hasil.data);
+      });
+    }
+  });
+};
+
+exports.booksFromGoogle = function(req, res) {
+  var text = req.param('text') ? req.param('text') : 'computer';
+  var count = req.param('count') ? req.param('count') : '5';
+  outRequest('https://www.googleapis.com/books/v1/volumes?q='+text+'&maxResults='+count, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      //result = JSON.parse(body);
+      var importResult = JSON.parse(body).items;
+      var product = {};
+      for (var i=0; i < importResult.length; i++){
+        var badData = importResult[i];
+        product = new Product();
+        product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
+        product.author = badData.volumeInfo.authors[0] ? badData.volumeInfo.authors[0] : 'Unknown';
+        product.category = badData.volumeInfo.categories[0] ? badData.volumeInfo.categories[0] : '';
+        product.imageUrl = badData.volumeInfo.imageLinks.smallThumbnail ? badData.volumeInfo.imageLinks.smallThumbnail : '';
+        product.price = 5;
+        product.stock = 5;
+        product.save();
+      }
+      res.json(importResult);
+      //console.log(body) // Print the google web page.
+    } else {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(error)
       });
     }
   });
