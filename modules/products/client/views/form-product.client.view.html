@@ -32,18 +32,20 @@
 
           <div class="form-group" show-errors>
             <label class="control-label" for="name">Price</label>
-            <input name="price" type="number" ng-model="vm.product.price" id="price" class="form-control" placeholder="Price" required>
+            <input name="price" type="number" ng-model="vm.product.price" id="price" class="form-control" placeholder="Price" min="0" required>
             <div ng-messages="vm.form.productForm.price.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Price is required.</p>
               <p class="help-block error-text" ng-message="number">Price must be number.</p>
+              <p class="help-block error-text" ng-message="min">Price must be positive./p>
             </div>
           </div>
           <div class="form-group" show-errors>
             <label class="control-label" for="stock">Stock</label>
-            <input name="stock" type="number" ng-model="vm.product.stock" id="name" class="form-control" placeholder="Stock" required>
+            <input name="stock" type="number" ng-model="vm.product.stock" id="name" class="form-control" placeholder="Stock" min="0" required>
             <div ng-messages="vm.form.productForm.stock.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Stock is required.</p>
               <p class="help-block error-text" ng-message="number">Stock must be number.</p>
+              <p class="help-block error-text" ng-message="min">Stock must be positive.</p>
             </div>
           </div>
           <label>Upload Picture</label>
@@ -66,7 +68,7 @@
             <strong ng-bind="error"></strong>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-default" ng-click="vm.save(vm.form.productForm.$valid)">{{vm.product._id ? 'Update' : 'Create'}}</button>            
+            <button type="submit" class="btn btn-default" ng-click="vm.save(vm.form.productForm.$valid)">{{vm.product._id ? 'Update' : 'Create'}}</button>
           </div>
           <div ng-show="vm.error" class="text-danger">
             <strong ng-bind="vm.error"></strong>

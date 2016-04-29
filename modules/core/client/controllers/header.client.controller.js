@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus',
-  function ($scope, $state, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus','$http',
+  function ($scope, $state, Authentication, Menus, $http) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -14,6 +14,11 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
+
+    $http.get('/api/bookscategories').then(function(response) {
+      $scope.categories = response.data;
+      $scope.statuscode = response.status;
+    });
 
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {

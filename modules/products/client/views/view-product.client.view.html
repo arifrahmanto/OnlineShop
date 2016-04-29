@@ -1,40 +1,44 @@
 <section>
   <div class="row wrapper">
-  <div class="page-header">
-    <h1 data-ng-bind="vm.product.title"></h1>
-    <small>by <b>{{vm.product.author}}</b></small>
-  </div>
-  <div class="pull-right"
-       data-ng-show="vm.authentication.user.roles.indexOf('admin')>-1">
+    <div class="page-header">
+      <h1 data-ng-bind="vm.product.title"></h1>
+      <small>by <b>{{vm.product.author}}</b></small>
+    </div>
+    <div class="pull-right"
+    data-ng-show="vm.authentication.user.roles.indexOf('admin')>-1">
     <a class="btn btn-primary"
-       data-ui-sref="products.edit({ productId: vm.product._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <table>
-    <tr>
-      <td>
-  <iframe frameborder="0" scrolling="no" style="border:0px" width=450 height=600 ng-src="{{vm.urlPreview}}">Something wrong</iframe>
-</td>
-<td valign="top">
-  <div class="wrapper-content">
-    <h1>$ <b>{{vm.product.price}}</b></h1><br/>
-    Description:
-    <p>{{vm.product.description}}</p>
-    Stock: {{vm.product.stock}} items<br/>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.product.created | date:'mediumDate'"></span>
-    </em>
-  </small>
-  <br/>
+    data-ui-sref="products.edit({ productId: vm.product._id })">
+    <i class="glyphicon glyphicon-edit"></i>
+  </a>
+  <a class="btn btn-primary" data-ng-click="vm.remove()">
+    <i class="glyphicon glyphicon-trash"></i>
+  </a>
 </div>
-</td>
-</tr>
+<table>
+  <tr>
+    <td valign="top">
+      <div class="wrapper-content">
+        <iframe ng-hide="vm.product.googleId==''" frameborder="0" scrolling="no" style="border:0px" width=450 height=600 ng-src="{{vm.urlPreview}}">Something wrong</iframe>
+        <img ng-show="vm.product.googleId==''" ng-src="{{vm.product.imageUrl}}" alt="{{vm.product.title}}"  class="user-profile-picture">
+      </div>
+    </td>
+    <td valign="top">
+      <div class="wrapper-content">
+        Category: <h2>{{vm.product.category}}</h2><br/>
+        Price: <h1>${{vm.product.price}}</h1><br/>
+        Description:
+        <p>{{vm.product.description}}</p>
+        Stock: <br/>{{vm.product.stock}} items<br/>
+        <small>
+          <em class="text-muted">
+            Posted on
+            <span data-ng-bind="vm.product.created | date:'mediumDate'"></span>
+          </em>
+        </small>
+        <br/>
+      </div>
+    </td>
+  </tr>
 </table>
 </div>
 </section>

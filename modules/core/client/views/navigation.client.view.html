@@ -21,12 +21,12 @@
       <li ng-class="{active: $uiRoute}" ui-route="/" >
         <a href="/#!/"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
       </li>
-      <li ng-class="{active: $uiRoute}" ui-route="/category/Business" >
+      <!--<li ng-class="{active: $uiRoute}" ui-route="/category/Business" >
         <a href="/category/Business"><i class="fa fa-money"></i> <span class="nav-label">Business</span></a>
       </li>
-      <!--<li ng-class="{active: $uiRoute}" ui-route="/category/Children" >
+      <li ng-class="{active: $uiRoute}" ui-route="/category/Children" >
         <a href="/category/Children"><i class="fa fa-child"></i> <span class="nav-label">Children's</span></a>
-      </li>-->
+      </li>
       <li ng-class="{active: $uiRoute}" ui-route="/category/Fiction" >
         <a href="/category/Fiction"><i class="fa fa-book"></i> <span class="nav-label">Fiction</span></a>
       </li>
@@ -35,7 +35,7 @@
       </li>
       <li ng-class="{active: $uiRoute}" ui-route="/category/Hobbies" >
         <a href="/category/Hobbies"><i class="fa fa-pagelines"></i> <span class="nav-label">Hobbies</span></a>
-      </li>-->
+      </li>
       <li ng-class="{active: $uiRoute}" ui-route="/category/Science" >
         <a href="/category/Science"><i class="fa fa-flask"></i> <span class="nav-label">Science</span></a>
       </li>
@@ -47,8 +47,7 @@
       </li>
       <li ng-class="{active: $uiRoute}" ui-route="/category/Travel" >
         <a href="/category/Travel"><i class="fa fa-bus"></i> <span class="nav-label">Travel</span></a>
-      </li>
-
+      </li>-->
       <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">
           <i class="fa {{item.icon}}"></i><span class="nav-label">{{::item.title}}&nbsp;</span><span class="caret"></span></a>
@@ -58,6 +57,12 @@
           </li>
         </ul>
         <a ng-switch-default ui-sref="{{item.state}}"><i class="fa {{item.icon}}"></i><span class="nav-label">{{::item.title}}</span></a>
+      </li>
+      <li ng-repeat="cat in categories" ng-class="{active: $uiRoute}" ui-route="/category/{{cat._id}}" >
+        <a href="/products?category={{cat._id}}"><i class="fa fa-book"></i> <span class="nav-label">{{cat._id}} ({{cat.count}})</span></a>
+      </li>
+      <li ng-class="{active: $uiRoute}" ui-route="/chat" >
+        <a href="/chat"><i class="fa fa-comments"></i> <span class="nav-label">Group Chat</span></a>
       </li>
     </ul>
   </div>

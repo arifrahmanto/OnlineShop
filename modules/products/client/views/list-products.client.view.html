@@ -1,14 +1,14 @@
 <section>
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Books:</h2>
+      <h2>{{vm.title}} Books:</h2>
     </div>
     <div class="col-lg-2">
     </div>
   </div>
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-    <div class="col-md-3"  data-ng-repeat="product in vm.products | filter:vm.searchText | pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize"
+    <div class="col-md-3"  data-ng-repeat="product in vm.filteredProducts | pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize"
       data-ui-sref="products.view({ productId: product._id })">
     <div class="ibox">
       <div class="ibox-content product-box">
@@ -29,7 +29,7 @@
     </div>
   </div>
   </div>
-  <uib-pagination total-items="vm.products.length" items-per-page="vm.pageSize" max-size="5" boundary-link-numbers="true" ng-model="vm.curPage" ></uib-pagination>
+  <uib-pagination total-items="vm.filteredProducts.length" items-per-page="vm.pageSize" max-size="5" boundary-link-numbers="true" ng-model="vm.curPage" ></uib-pagination>
 </div>
 
 </section>

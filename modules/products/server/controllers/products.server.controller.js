@@ -133,9 +133,9 @@ exports.getCategories = function(req, res, next) {
     { $group: {
       _id: '$category',
       count: { $sum: 1 }
-    }},
+    } },
     { $sort: { 'count': -1 } },
-    { $limit: 5 }
+    { $limit: 8 }
   ], function(err, result) {
     if(err){
       next(err);
@@ -163,7 +163,7 @@ exports.booksFromGoogle = function(req, res) {
         product.imageUrl = badData.volumeInfo.imageLinks.smallThumbnail ? badData.volumeInfo.imageLinks.smallThumbnail : '';
         product.googleId = badData.id;
         product.status = 'A';
-        product.price = 5;
+        product.price = 15;
         product.stock = 5;
         product.save();
         products.push(product);

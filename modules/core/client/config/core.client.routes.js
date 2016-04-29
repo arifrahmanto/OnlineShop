@@ -15,7 +15,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'modules/core/client/views/home.client.view.html'
+      templateUrl: 'modules/products/client/views/list-products.client.view.html',
+      controller: 'ProductsListController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Products List'
+      }
+      //templateUrl: 'modules/core/client/views/home.client.view.html'
     })
     .state('category', {
       url: '/category/:categoryId',
