@@ -23,6 +23,12 @@
           pageTitle: 'Products List'
         }
       })
+      .state('products.manage', {
+        url: '/manage',
+        templateUrl: 'modules/products/client/views/products-manage.client.view.html',
+        controller: 'ProductsManageController',
+        controllerAs: 'vm'
+      })
       .state('products.create', {
         url: '/create',
         templateUrl: 'modules/products/client/views/form-product.client.view.html',
