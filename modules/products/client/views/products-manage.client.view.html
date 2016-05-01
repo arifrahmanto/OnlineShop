@@ -1,0 +1,39 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>Manage Books:</h2>
+    </div>
+    <div class="col-lg-2">
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+      <table ng-table="productsTable" class="table table-condensed table-striped" show-filter="true">
+   <tr ng-repeat="product in data">
+       <td data-title="'Picture'" >
+           <img ng-src="{{product.imageUrl}}" alt="{{product.title}}"  class="user-profile-picture">
+       </td>
+       <td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">
+           {{product.title}}
+       </td>
+       <td data-title="'Author'" sortable="'author'" filter="{ 'author': 'text' }">
+           {{product.author}}
+       </td>
+       <td data-title="'Category'" sortable="'category'" filter="{ 'category': 'text' }">
+           {{product.category}}
+       </td>
+       <td data-title="'Price'" sortable="'price'" filter="{ 'price': 'number' }">
+           {{product.price}}
+       </td>
+       <td data-title="'Stock'" sortable="'stock'" filter="{ 'stock': 'number' }">
+           {{product.stock}}
+       </td>
+       <td data-title="'Action'" >
+         <button class="btn btn-default btn-xs" style="width:70px" data-ui-sref="products.view({ productId: product._id })">View</button>
+         <br/>
+         <button class="btn btn-warning btn-xs" style="width:70px" data-ui-sref="products.edit({ productId: product._id })">Edit</button>
+
+       </td>
+   </tr>
+ </table>
+ </div>
+</section>

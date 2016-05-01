@@ -22,7 +22,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
-      $scope.isCollapsed = false;
+      //$scope.isCollapsed = false;
     });
   }
 ]);

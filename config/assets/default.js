@@ -6,7 +6,8 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/metisMenu/dist/metisMenu.min.css',
-        'public/lib/fontawesome/css/font-awesome.min.css'
+        'public/lib/fontawesome/css/font-awesome.min.css',
+        'public/lib/ng-table/dist/ng-table.min.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -30,7 +31,8 @@ module.exports = {
       'modules/*/client/css/*.css'
     ],
     less: [
-      'modules/*/client/less/*.less'
+      'modules/*/client/less/*.less',
+      'public/lib/ng-table/dist/ng-table.less'
     ],
     sass: [
       'modules/*/client/scss/*.scss'

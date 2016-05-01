@@ -27,7 +27,11 @@
         url: '/manage',
         templateUrl: 'modules/products/client/views/products-manage.client.view.html',
         controller: 'ProductsManageController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin'],
+          pageTitle : 'Manage Products'
+        }
       })
       .state('products.create', {
         url: '/create',

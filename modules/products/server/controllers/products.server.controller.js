@@ -154,19 +154,21 @@ exports.booksFromGoogle = function(req, res) {
       var importResult = JSON.parse(body).items;
       var products = [];
       for (var i=0; i < importResult.length; i++){
-        var badData = importResult[i];
-        var product = new Product();
-        product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
-        product.description = badData.volumeInfo.description ? badData.volumeInfo.description : '';
-        product.author = badData.volumeInfo.authors ? badData.volumeInfo.authors[0] : 'Unknown';
-        product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : 'No Category';
-        product.imageUrl = badData.volumeInfo.imageLinks.smallThumbnail ? badData.volumeInfo.imageLinks.smallThumbnail : '';
-        product.googleId = badData.id;
-        product.status = 'A';
-        product.price = 15;
-        product.stock = 5;
-        product.save();
-        products.push(product);
+        try {
+          var badData = importResult[i];
+          var product = new Product();
+          product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
+          product.description = badData.volumeInfo.description ? badData.volumeInfo.description : '';
+          product.author = badData.volumeInfo.authors ? badData.volumeInfo.authors[0] : 'Unknown';
+          product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : 'No Category';
+          product.imageUrl = badData.volumeInfo.imageLinks.thumbnail ? badData.volumeInfo.imageLinks.thumbnail : '';
+          product.googleId = badData.id;
+          product.status = 'A';
+          product.price = 15;
+          product.stock = 5;
+          product.save();
+          products.push(product);
+        } catch(e) {}
       }
       res.jsonp(products);
     } else {

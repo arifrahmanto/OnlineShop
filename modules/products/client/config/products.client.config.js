@@ -8,9 +8,15 @@
   menuConfig.$inject = ['Menus'];
 
   function menuConfig(Menus) {
-    Menus.addMenuItem('topbar', {
+    Menus.addSubMenuItem('topbar', 'admin', {
       title: 'Create Products',
       state: 'products.create',
+      icon: 'fa-plus-square-o',
+      roles: ['admin']
+    });
+    Menus.addSubMenuItem('topbar', 'admin', {
+      title: 'Manage Products',
+      state: 'products.manage',
       icon: 'fa-plus-square-o',
       roles: ['admin']
     });
