@@ -23,7 +23,7 @@
       } else {
         vm.filteredProducts = $filter('filter')(data, searchValue.search);
         vm.title = searchValue.search;
-      };
+      }
       vm.numberOfPage = Math.ceil(vm.filteredProducts.length / vm.pageSize);
     });
   }
