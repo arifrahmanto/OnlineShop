@@ -6,7 +6,9 @@
                 <h1 class="logo-name">Bs:)</h1>
 
             </div>
-            <h3>Register to <i class="fa fa-book"></i><b> Bookstore:)</b></h3>
+            <p>Please register with your email or
+              <button class="btn btn-danger btn-outline" type="button" ng-click="callOauthProvider('/api/auth/google')"><i class="fa fa-google"></i>oogle+</button>
+            </p>
             <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
                 <fieldset>
                     <div class="form-group" show-errors>
@@ -69,7 +71,7 @@
                     </div>
                     <div ng-show="error" class="text-center text-danger">
                         <strong ng-bind="error"></strong>
-                    </div>                    
+                    </div>
                 </fieldset>
             </form>
         </div>

@@ -10,7 +10,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     $scope.menu = Menus.getMenu('topbar');
 
     // Toggle the menu items
-    $scope.isCollapsed = false;
+    $scope.isCollapsed = true;
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
@@ -22,7 +22,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
-      //$scope.isCollapsed = false;
+      $scope.isCollapsed = false;
     });
   }
 ]);

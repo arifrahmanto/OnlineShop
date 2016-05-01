@@ -7,7 +7,7 @@
     </div>
   </div>
   <br/>
-  <div class="pull-right">Sort by: 
+  <div class="pull-right">Sort by:
     <select name="orderSelection" id="orderSelection" ng-model="vm.orderSelect">
       <option value="-created" selected="selected">Last Update</option>
       <option value="-stock">Stock</option>
@@ -21,7 +21,7 @@
 
     <div class="row">
 
-    <div class="col-md-3"  data-ng-repeat="product in vm.filteredProducts | pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize | orderBy: vm.orderSelect"
+    <div class="col-md-3"  data-ng-repeat="product in vm.filteredProducts | orderBy: vm.orderSelect | pagination: (vm.curPage - 1) * vm.pageSize | limitTo: vm.pageSize"
       data-ui-sref="products.view({ productId: product._id })">
     <div class="ibox">
       <div class="ibox-content product-box">
