@@ -35,7 +35,8 @@
           <small class="text-muted">{{product.author}}</small>
           <a href="#" class="product-name"> {{product.title}}</a>
           <div class="m-t text-righ">
-            <a href="#" class="btn btn-xs btn-outline btn-primary">add to cart</a>
+            <a href="#" class="btn btn-xs btn-outline btn-warning" ng-show="product.stock > 0">add to cart</a>
+            <a href="#" class="btn btn-danger" ng-show="product.stock == 0">SOLD OUT</a>
           </div>
         </div>
       </div>

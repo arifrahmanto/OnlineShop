@@ -6,11 +6,11 @@
     </div>
     <div class="pull-right"
     data-ng-show="vm.authentication.user.roles.indexOf('admin')>-1">
-    <a class="btn btn-primary"
+    <a class="btn btn-warning"
     data-ui-sref="products.edit({ productId: vm.product._id })">
     <i class="glyphicon glyphicon-edit"></i>
   </a>
-  <a class="btn btn-primary" data-ng-click="vm.remove()">
+  <a class="btn btn-danger" data-ng-click="vm.remove()" ng-hide="{{vm.product.stock>0}}">
     <i class="glyphicon glyphicon-trash"></i>
   </a>
 </div>

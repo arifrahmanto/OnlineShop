@@ -21,10 +21,13 @@
        <td data-title="'Category'" sortable="'category'" filter="{ 'category': 'text' }">
            {{product.category}}
        </td>
-       <td data-title="'Price'" sortable="'price'" filter="{ 'price': 'number' }">
+       <td data-title="'Description'" filter="{ 'category': 'text' }">
+           {{product.description.substr(0,200)}}<span ng-show="{{product.description.length > 200}}"> ...</span>
+       </td>
+       <td data-title="'Price'" sortable="'price'" filter="{ 'price': 'number' }" align="right">
            {{product.price}}
        </td>
-       <td data-title="'Stock'" sortable="'stock'" filter="{ 'stock': 'number' }">
+       <td data-title="'Stock'" sortable="'stock'" filter="{ 'stock': 'number' }" align="right">
            {{product.stock}}
        </td>
        <td data-title="'Action'" >

@@ -158,14 +158,15 @@ exports.booksFromGoogle = function(req, res) {
           var badData = importResult[i];
           var product = new Product();
           product.title = badData.volumeInfo.title ? badData.volumeInfo.title : 'No Title';
+          product.isbn = badData.volumeInfo.industryIdentifiers ? badData.volumeInfo.industryIdentifiers[0].identifier : '';
           product.description = badData.volumeInfo.description ? badData.volumeInfo.description : '';
           product.author = badData.volumeInfo.authors ? badData.volumeInfo.authors[0] : 'Unknown';
           product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : 'No Category';
           product.imageUrl = badData.volumeInfo.imageLinks.thumbnail ? badData.volumeInfo.imageLinks.thumbnail : '';
           product.googleId = badData.id;
           product.status = 'A';
-          product.price = 15;
-          product.stock = 5;
+          product.price = Math.floor(Math.random() * 10000)/100;
+          product.stock = Math.floor((Math.random() * 10) + 1);
           product.save();
           products.push(product);
         } catch(e) {}
