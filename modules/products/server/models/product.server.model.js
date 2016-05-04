@@ -45,6 +45,12 @@ var ProductSchema = new Schema({
     default: '',
     trim: true
   },
+  images: {
+    type: [{
+      type: String
+    }],
+    default: []
+  },
   price: {
     type: Number,
     default: 0
@@ -55,7 +61,7 @@ var ProductSchema = new Schema({
   },
   status: {
     type: String,
-    default: 'A',
+    default: 'Active',
     trim: true
   },
   googleId: {

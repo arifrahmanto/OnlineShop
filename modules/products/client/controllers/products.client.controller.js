@@ -18,11 +18,12 @@
     vm.remove = remove;
     vm.save = save;
     vm.urlPreview = $sce.trustAsResourceUrl('https://books.google.co.id/books?id='+vm.product.googleId+'&lpg=PP1&pg=PP1&output=embed');
-    //vm.preview = product.googleId ? $sce.trustAsResourceUrl()'https://books.google.co.id/books?id='+product.googleId+'=PP1&dq=fiction&pg=PP1&output=embed') : '';
 
     var defImage = 'modules/products/client/img/book.png';
     if (vm.product.imageUrl === undefined) {
       vm.product.imageUrl = defImage;
+      vm.product.images = [];
+      vm.product.images.push(defImage);
     } else {
       defImage = vm.product.imageUrl;
     }
@@ -50,7 +51,9 @@
 
         fileReader.onload = function (fileReaderEvent) {
           $timeout(function () {
-            vm.product.imageUrl = fileReaderEvent.target.result;
+            //vm.product.imageUrl = fileReaderEvent.target.result;
+            vm.product.images.push(fileReaderEvent.target.result);
+            $scope.uploadProfilePicture();
           }, 0);
         };
       }
@@ -60,8 +63,8 @@
     $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
       // Show success message
       $scope.success = true;
-
-      vm.product.imageUrl = response.imageURL;
+      vm.product.images[vm.product.images.length-1] = response.imageURL;
+      //vm.product.imageUrl = response.imageURL;
       $scope.uploader.clearQueue();
     };
 
@@ -86,7 +89,13 @@
     // Cancel the upload process
     $scope.cancelUpload = function () {
       $scope.uploader.clearQueue();
-      vm.product.imageUrl = defImage;
+      vm.product.images.splice(vm.product.images.length-1,1);
+      //vm.product.imageUrl = defImage;
+    };
+
+    $scope.cancelUpload2 = function(img){
+      vm.product.images.splice(vm.product.images.length-1,1);
+      $scope.uploader.clearQueue();
     };
 
     // Remove existing Product

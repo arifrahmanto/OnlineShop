@@ -5,9 +5,9 @@
     .module('products')
     .controller('ProductsManageController', ProductsManageController);
 
-  ProductsManageController.$inject = ['ProductsService','$scope','NgTableParams', '$filter'];
+  ProductsManageController.$inject = ['ProductsService','$scope','NgTableParams', '$filter', '$http'];
 
-  function ProductsManageController(ProductsService, $scope, NgTableParams, $filter) {
+  function ProductsManageController(ProductsService, $scope, NgTableParams, $filter, $http) {
     var vm = this;
 
     $scope.productsTable = new NgTableParams({
@@ -26,12 +26,5 @@
         });
       }
     });
-    // Products manage controller logic
-    // ...
-
-    init();
-
-    function init() {
-    }
   }
 })();

@@ -45,37 +45,28 @@
               <p class="help-block error-text" ng-message="required">Price is required.</p>
               <p class="help-block error-text" ng-message="number">Price must be number.</p>
               <p class="help-block error-text" ng-message="min">Price must be positive.</p>
-              <p class="help-block error-text" ng-message="pattern">Maximum 2 decimal.</p>  
-              </div>
+              <p class="help-block error-text" ng-message="pattern">Maximum 2 decimal.</p>
             </div>
-            <div class="form-group" show-errors>
-              <label class="control-label" for="stock">Stock</label>
-              <input name="stock" type="number" ng-model="vm.product.stock" id="name" class="form-control" placeholder="Stock" min="0" required>
-              <div ng-messages="vm.form.productForm.stock.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Stock is required.</p>
-                <p class="help-block error-text" ng-message="number">Stock must be number.</p>
-                <p class="help-block error-text" ng-message="min">Stock must be positive.</p>
-              </div>
+          </div>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="stock">Stock</label>
+            <input name="stock" type="number" ng-model="vm.product.stock" id="name" class="form-control" placeholder="Stock" min="0" required>
+            <div ng-messages="vm.form.productForm.stock.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Stock is required.</p>
+              <p class="help-block error-text" ng-message="number">Stock must be number.</p>
+              <p class="help-block error-text" ng-message="min">Stock must be positive.</p>
             </div>
-            <div class="form-group" show-errors>
-              <label class="control-label" for="stock">Status</label>
-              <select class="form-control" name="status" id="status" ng-model="vm.product.status" required>
-                <option value="A" selected="selected">Active</option>
-                <option value="I">Inactive</option>
-              </select>
-              <div ng-messages="vm.form.productForm.stock.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Status is required.</p>
-              </div><br>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-warning" ng-click="vm.save(vm.form.productForm.$valid)">{{vm.product._id ? 'Update' : 'Create'}}</button>
-            </div>
-            <div ng-show="vm.error" class="text-danger">
-              <strong ng-bind="vm.error"></strong>
-            </div>
-          </fieldset>
-        </div>
-        <div class="col-lg-8">
+          </div>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="stock">Status</label>
+            <select class="form-control" name="status" id="status" ng-model="vm.product.status" ng-init="vm.product.status='Active'" required>
+              <option value="Active" selected="selected">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+            <div ng-messages="vm.form.productForm.stock.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Status is required.</p>
+            </div><br>
+          </div>
           <div class="form-group" show-errors>
             <label class="control-label" for="name">Description</label>
             <textarea name="description" type="text" ng-model="vm.product.description" id="description" class="form-control" placeholder="Description" rows="11"/>
@@ -83,27 +74,45 @@
               <p class="help-block error-text" ng-message="required">Description is required.</p>
             </div>
           </div>
-          <label>Upload Picture</label>
           <div class="form-group">
-            <img ng-src="{{vm.product.imageUrl}}" alt="{{product.title}}" class="img-thumbnail user-profile-picture">
+            <button type="submit" class="btn btn-warning" ng-click="vm.save(vm.form.productForm.$valid)">{{vm.product._id ? 'Update' : 'Create'}}</button>
           </div>
-          <div class="form-group" ng-hide="uploader.queue.length">
-            <span class="btn btn-default btn-file">
-              Select Image <input type="file" nv-file-select uploader="uploader">
-            </span>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
           </div>
-          <div class="form-group" ng-show="uploader.queue.length">
-            <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button>
-            <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
-          </div>
-          <div ng-show="success" class="text-success">
-            <strong>Picture Changed Successfully</strong>
-          </div>
-          <div ng-show="error" class="text-danger">
-            <strong ng-bind="error"></strong>
-          </div>
-        </div>
+        </fieldset>
       </div>
-    </form>
+      <div class="col-lg-8">
+        <div class="form-group">
+          <label>Default Picture</label>
+          <br/>
+          <img ng-src="{{vm.product.imageUrl}}" alt="{{product.title}}" class="img-thumbnail user-profile-picture" style="min-height: 400px">
+        </div>
+
+        <label>Picture List</label>
+        <div class="row"/>
+        <div  class="col-md-2" ng-repeat="img in vm.product.images | orderBy:'-toString()'">
+          <img ng-src="{{img}}" class="img-thumbnail user-profile-picture" ng-click="vm.product.imageUrl=img"><br/>
+          <a ng-click="vm.product.images.splice(vm.product.images.indexOf(img),1)">[x] Remove</a>
+        </div>
+        <div class="row"/><br/>
+        <div class="form-group" ng-hide="uploader.queue.length">
+          <span class="btn btn-default btn-file">
+            Upload new picture <input type="file" nv-file-select uploader="uploader">
+          </span>
+        </div>
+        <!--<div class="form-group" ng-show="uploader.queue.length">
+          <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button>
+          <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
+        </div>
+        <div ng-show="success" class="text-success">
+        <strong>Picture Changed Successfully</strong>
+      </div>-->
+      <div ng-show="error" class="text-danger">
+        <strong ng-bind="error"></strong>
+      </div>
+    </div>
   </div>
+</form>
+</div>
 </section>

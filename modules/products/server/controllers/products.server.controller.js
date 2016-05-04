@@ -163,8 +163,10 @@ exports.booksFromGoogle = function(req, res) {
           product.author = badData.volumeInfo.authors ? badData.volumeInfo.authors[0] : 'Unknown';
           product.category = badData.volumeInfo.categories ? badData.volumeInfo.categories[0] : 'No Category';
           product.imageUrl = badData.volumeInfo.imageLinks.thumbnail ? badData.volumeInfo.imageLinks.thumbnail : '';
+          product.images = [];
+          product.images.push(product.imageUrl);
           product.googleId = badData.id;
-          product.status = 'A';
+          product.status = 'Active';
           product.price = Math.floor(Math.random() * 10000)/100;
           product.stock = Math.floor((Math.random() * 10) + 1);
           product.save();
