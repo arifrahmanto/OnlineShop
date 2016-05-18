@@ -9,6 +9,12 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
+      .state('google-import', {
+        url: '/google-import',
+        templateUrl: 'modules/products/client/views/google-import.client.view.html',
+        controller: 'GoogleimportController',
+        controllerAs: 'vm'
+      })
       .state('products', {
         abstract: true,
         url: '/products',
